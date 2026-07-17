@@ -46,6 +46,12 @@ function operate(number, number2, operator) {
     } else if (operator === "*") {
         return (multiply(number, number2));
     } else if (operator === "/") {
+        if (number2 === "0") {
+            alert("Hmmm. You tried to do something inappropriate.");
+            operation.length = 0;
+            display.textContent = "";
+            return;
+        }
         let divResult = (divide(number, number2));
         let roundResult = Math.round(divResult * 100) / 100;  
         return roundResult;
@@ -54,6 +60,8 @@ function operate(number, number2, operator) {
 
 const enter = document.querySelector("#enter");
 enter.addEventListener("click", () => {
+
+
     result = operate(operation.at(0), operation.at(2), operation.at(1));
     console.log(result);
     operation.length = 0;
