@@ -21,33 +21,50 @@ let number2;
 let result;
 
 
-function operate(number, number2, operator) {
-    if (op === "+") {
-    return add(number, number2);
-    } else if (operator === "-") {
-        return subtract(number, number2);
-    } else if (operator === "*") {
-        return multiply(number, number2);
-    } else if (operator === "/") {
-        return divide(number, number2);
-    }
-}
-
 let display = document.querySelector(".display");
-display.textContent = number;
+//display.textContent = number;
 
-const buttons = document.querySelectorAll("button");
-
-buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-        number = button.dataset.value;
-        display.textContent = number;
-        console.log(button.dataset.value);
-    })
-});
+const buttons = document.querySelectorAll(".notEnter");
 
 let operation = [];
 
 
-//^^^ this makes it so when you press a button you get the button value and the display updates as well.
 
+
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        number = button.dataset.value;
+        //display.textContent = number;
+        operation.push(number);
+        let operationString = operation.toString();
+    })
+});
+
+function operate(number, number2, operator) {
+    let result;
+    if (operator === "+") {
+        let int1 = Number(number);
+        let int2 = Number(number2);
+    result = (add(int1, int2));
+    return result;
+    } else if (operator === "-") {
+        result = (subtract(number, number2));
+        return result;
+    } else if (operator === "*") {
+        result = (multiply(number, number2));
+        return result;
+    } else if (operator === "/") {
+        result = (divide(number, number2));
+        return result;
+    }
+}
+
+const enter = document.querySelector("#enter");
+
+enter.addEventListener("click", () => {
+    result2 = operate(operation.at(0), operation.at(2), operation.at(1));
+    console.log(result2);
+    operation.length = 0;
+    operation.push(result2);
+
+})
