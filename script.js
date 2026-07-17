@@ -20,18 +20,34 @@ let operator;
 let number2;
 let result;
 
-//create a new function that takes number, number2, the operator, and the 4 math functions above and uses them.
 
-function operate(num, num2, op) {
+function operate(number, number2, operator) {
     if (op === "+") {
-    return add(num, num2);
-    } else if (op === "-") {
-        return subtract(num, num2);
-    } else if (op === "*") {
-        return multiply(num, num2);
-    } else if (op === "/") {
-        return divide(num, num2);
+    return add(number, number2);
+    } else if (operator === "-") {
+        return subtract(number, number2);
+    } else if (operator === "*") {
+        return multiply(number, number2);
+    } else if (operator === "/") {
+        return divide(number, number2);
     }
 }
 
-console.log(operate(9, 9, "0"));
+let display = document.querySelector(".display");
+display.textContent = number;
+
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        number = button.dataset.value;
+        display.textContent = number;
+        console.log(button.dataset.value);
+    })
+});
+
+let operation = [];
+
+
+//^^^ this makes it so when you press a button you get the button value and the display updates as well.
+
