@@ -65,17 +65,25 @@ function operate(number, number2, operator) {
 const enter = document.querySelector("#enter");
 
 enter.addEventListener("click", () => {
-    let operatorArray = operation.filter((operator) => {
-        operator === "+"
-    });
-    stringArray = operatorArray.toString();
-    console.log(stringArray);
-
+        let continueOperation = true;
+        //checks if there are multiple operators and removes the middle one 
+        let remove = ["+", "-", "/", "*"];
+        let operatorArray = [];
+        operation.forEach(x => {
+            if (remove.includes(x)) operatorArray.push(x);
+        });
+        if (operatorArray.length > 1) {
+            operation.splice(1,1);
+            alert("too many operators!");
+            continueOperation = false;
+        }
+        if (continueOperation === true) {
         result = operate(operation.at(0), operation.at(2), operation.at(1));
         console.log(result);
         operation.length = 0;
         operation.push(result);
-    display.textContent = result; 
+    display.textContent = result;
+    } if (continueOperation === false) {return};
    
 });
 
@@ -94,6 +102,9 @@ clear.addEventListener("click", () => {
     if (result) {
         result = 0;
         display.textContent = "0";
+    } else if (result = NaN) {
+        result = 0;
+        display.textContent = "0"
     };
 });
 
