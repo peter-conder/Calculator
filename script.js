@@ -58,17 +58,34 @@ function operate(number, number2, operator) {
     }
 }
 
+/**
+ * If the equation ends in an operand, terminate the equality function.
+ */
+
 const enter = document.querySelector("#enter");
+
 enter.addEventListener("click", () => {
+    let operatorArray = operation.filter((operator) => {
+        operator === "+"
+    });
+    stringArray = operatorArray.toString();
+    console.log(stringArray);
 
+        result = operate(operation.at(0), operation.at(2), operation.at(1));
+        console.log(result);
+        operation.length = 0;
+        operation.push(result);
+    display.textContent = result; 
+   
+});
 
+/*
     result = operate(operation.at(0), operation.at(2), operation.at(1));
     console.log(result);
     operation.length = 0;
     operation.push(result);
-    display.textContent = result;
+    display.textContent = result; }); */
 
-});
 
 
 const clear = document.querySelector(".clear");
@@ -79,3 +96,4 @@ clear.addEventListener("click", () => {
         display.textContent = "0";
     };
 });
+
