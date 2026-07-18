@@ -11,6 +11,8 @@ let result;
 let display = document.querySelector(".display");
 const buttons = document.querySelectorAll(".notEnter");
 let operation = [];
+let continueOperation = true;
+
 
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -18,14 +20,14 @@ buttons.forEach((button) => {
         operation.push(number);
         let lastInt = operation[operation.length - 1];
         let pentultimateInt = operation[operation.length - 2];
-        //console.log(lastInt);
+        console.log(operation);
 
         let digits = ["1","2","3","4","5","6","7","8","9","0"];
         if (digits.includes(lastInt) && digits.includes(pentultimateInt)) {
-        let combinedInt = lastInt + '' + pentultimateInt;
+        let combinedInt = pentultimateInt + '' + lastInt;
         operation.splice(-2, 2);
         operation.push(combinedInt);
-        //console.log(operation);
+        console.log(operation);
     } else return;
     });
 });
@@ -41,16 +43,17 @@ function operate(number, number2, operator) {
     } else if (operator === "*") {
         return (multiply(number, number2));
     } else if (operator === "/") {
+        continueDivision = true;
+
         if (number2 === "0") {
             alert("Hmmm. You tried to do something inappropriate.");
-            operation.length = 0;
-            display.textContent = "";
-            //.log(operation);
-            return;
+            return "0";
         }
+        if (continueDivision = true) {
         let divResult = (divide(number, number2));
         let roundResult = Math.round(divResult * 100) / 100;  
-        return roundResult;
+        return roundResult; 
+        }
     }
 }
 
@@ -58,7 +61,6 @@ function operate(number, number2, operator) {
 const enter = document.querySelector("#enter");
 
 enter.addEventListener("click", () => {
-        let continueOperation = true;
         let remove = ["+", "-", "/", "*"];
         let operatorArray = [];
         operation.forEach(x => {
@@ -70,11 +72,16 @@ enter.addEventListener("click", () => {
             continueOperation = false;
         }
         if (continueOperation === true) {
+        //This is the actual math function
         result = operate(operation.at(0), operation.at(2), operation.at(1));
+
+    
         console.log(result);
         operation.length = 0;
-        operation.push(result);
-    display.textContent = result;
+        
+        if (result !=0) {
+        operation.push(result);}
+        display.textContent = result;
     } if (continueOperation === false) {return};
    
 });
