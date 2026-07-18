@@ -12,10 +12,17 @@ let display = document.querySelector(".display");
 const buttons = document.querySelectorAll(".notEnter");
 let operation = [];
 let continueOperation = true;
+let isResult = false;
 
 
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
+
+        if (isResult === true) {
+            operation.length = 0;   //clears the display
+            isResult = false;       //turns isResult to false
+        }
+
         number = button.dataset.value;
         operation.push(number);
         let lastInt = operation[operation.length - 1];
@@ -73,12 +80,10 @@ enter.addEventListener("click", () => {
         }
         if (continueOperation === true) {
         //This is the actual math function
-        result = operate(operation.at(0), operation.at(2), operation.at(1));
-
-    
+        result = operate(operation.at(0), operation.at(2), operation.at(1));    
         console.log(result);
         operation.length = 0;
-        
+        isResult = true;
         if (result !=0) {
         operation.push(result);}
         display.textContent = result;
@@ -97,5 +102,4 @@ clear.addEventListener("click", () => {
         display.textContent = "0"
     };
 });
-
 
