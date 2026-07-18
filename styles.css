@@ -19,7 +19,7 @@ body {
     height: 45vw;
     justify-content: space-around;
     align-items: center;
-    border-radius: 10%;
+    border-radius: 20px;
 }
 
 .displayContainer {
@@ -89,4 +89,8 @@ button {
     justify-self: center;
     justify-content: center;
 
+}
+
+.displayContainer {
+    border-radius: 10px;
 }
